@@ -27,7 +27,11 @@ def choose_directory(action, root_window) -> None:
     game_dir = next((dir for dir in possible_game_dirs if os.path.exists(dir)), None)
     directory = askopenfilename(initialdir=game_dir,
                                 title="Select where \"Wuthering Waves.exe\" is located.",
-                                filetypes=[("exe files", "Wuthering Waves.exe")])
+                                filetypes=[("exe files", '"Wuthering Waves.exe"')])
+
+    if not directory:
+        return
+
     userIsAdmin = admin_check()
     if "Program Files" in directory and not userIsAdmin:
         messagebox.showerror("Admin Rights",

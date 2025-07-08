@@ -1,4 +1,4 @@
-from tkinter import Label, Button, Tk, CENTER
+from tkinter import Tk, PhotoImage, CENTER
 
 from checks.update import *
 from checks.permissions import *
@@ -10,9 +10,10 @@ def main() -> int:
     root_window = Tk()
     root_window.title(f"Wuthering Waves FPS Unlocker v{version}")
     root_window.geometry("650x550")
-    root_window.iconbitmap(default=find_ico_path(r"icon.ico"))
+    icon = PhotoImage(file=find_ico_path("share/icons/hicolor/32x32/apps/wuwa-simple-fps-unlocker.png"))
+    root_window.iconphoto(False, icon)
     root_window.withdraw()
-    if not admin_check():
+    if is_windows() and not admin_check():
         ask_admin = messagebox.askyesno("Admin Rights",
                                         "This program might require Admin Rights to function properly depending on where the game is installed (E.g. Program Files). "
                                         "\nWould you like to restart the program with Admin Rights?"
